@@ -53,6 +53,9 @@
   }
   
   @media only screen and (max-width: 978px) {
+    .navbar{
+      width: 100%;
+    }
     .nav_icon {
       display: inline;
     }

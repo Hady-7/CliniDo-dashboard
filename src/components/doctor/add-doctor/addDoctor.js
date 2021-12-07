@@ -6,7 +6,7 @@ const AddDoctor = () => {
  
   return (
     <div>
-        doctor list
+       add doctor 
     </div>
   );
 };

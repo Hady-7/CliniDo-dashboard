@@ -15,7 +15,9 @@
   margin-bottom: 30px;
   /* color: #E85B6B; */
 }
-
+#span{
+  color: #2867db;
+}
 .sidebar__img {
   display: flex;
   align-items: center;
@@ -37,7 +39,7 @@
 }
 
 .sidebar__menu > h2 {
-  color: #3ea175;
+  color: #2867db;
   font-size: 16px;
   margin-top: 15px;
   margin-bottom: 5px;
