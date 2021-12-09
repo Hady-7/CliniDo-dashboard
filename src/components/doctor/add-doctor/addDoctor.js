@@ -1,6 +1,268 @@
 import "./addDoctor.css";
+import React, { useState } from "react";
+
+const citiesData = [
+  {
+    name: "Alexandria",
+    areas: [
+      "Borg El-Arab",
+      "Semoha",
+      "Elramel Station",
+      "El-Betash",
+      "Sedy Gaber",
+      "Sedy Beshr",
+    ],
+  },
+  {
+    name: "Cairo",
+    areas: [
+      "Naser City",
+      "6-october",
+      "New Cairo",
+      "El Shrouk",
+      "El nozha",
+      "Madinaty",
+      "El- Rehab",
+      "El-Mostabal",
+    ],
+  },
+  {
+    name: "Assuit",
+    areas: ["Dayrot", "Qusiya", "MAnfalot", "Abnob", "El Badary", "Sahel Slem"],
+  },
+  {
+    name: "BeniSuef",
+    areas: [
+      "Naser",
+      "Ehnasya",
+      "Smesta",
+      "Beni Suef",
+      "Bba",
+      "El wasta",
+      "El fashn",
+    ],
+  },
+  {
+    name: "Damietta",
+    areas: [
+      "Kafer said",
+      "Farscore",
+      "Kafer El batekh",
+      "El tharka",
+      "Damietta",
+    ],
+  },
+  {
+    name: "ElBeheira",
+    areas: [
+      "Damnhor",
+      "Kafer EL dawar",
+      "Rashed city",
+      "Edco",
+      "Abo EL matamer",
+      "Abo Homous",
+      "Wady El natroon",
+      "Shobrkhet",
+    ],
+  },
+  {
+    name: "ElDakahlia",
+    areas: [
+      "metghmer",
+      "Agia",
+      "Bany abeed",
+      "El Manzala",
+      "Dakornous",
+      "El Gamalya",
+    ],
+  },
+  {
+    name: "ElIsmailia",
+    areas: [
+      "Fayed City",
+      "Cairo",
+      "El Cantra shark",
+      "El Cantra gharb",
+      "Abo El saraser",
+      "El Tael el kbber",
+      "El kasaseen",
+    ],
+  },
+  {
+    name: "Minia",
+    areas: [
+      "Maghagha",
+      "Bany Mazar",
+      "Malwy",
+      "Samalot",
+      "Dear mwas",
+      "El Adwa",
+      "El fkrya",
+    ],
+  },
+  {
+    name: "ElSharqia",
+    areas: [
+      "Zakazek",
+      "Belbes",
+      "Hehaa",
+      "Abo hmad",
+      "Fakous",
+      "Abo Kbeer",
+      "El hosainya",
+      "Saker",
+    ],
+  },
+  {
+    name: "Fayoum",
+    areas: ["Tamya", "Snores", "Etsaa", "Abshway", "Yousef el sedyak"],
+  },
+  {
+    name: "Gharbia",
+    areas: [
+      "Tanta",
+      "Zefta",
+      "El Mahala el kobra",
+      "Kator",
+      "Samanode",
+      "Basyon",
+      "El Zayat",
+      "El santa",
+    ],
+  },
+  {
+    name: "Giza",
+    areas: [
+      "Badrashin City",
+      "El-Saf City",
+      "Atfeih",
+      "El-ayat",
+      "Osem",
+      "Kerdasa",
+    ],
+  },
+  { name: "Hurghada", areas: ["Sowma bay", "Makady bay", "El fander"] },
+  {
+    name: "PortSaid",
+    areas: [
+      "Abo Ramad",
+      "Karlos",
+      "Magawesh",
+      "por fouad",
+      "EL shrouk",
+      "El mankh",
+      "El dawhy",
+      "EL Arab",
+      "El zhoure",
+    ],
+  },
+  { name: "North Coast", areas: ["Marina", "Kelo Batra", "Ageba"] },
+  {
+    name: "Menofia",
+    areas: ["El-sadat", "shben El-kom", "Mnof", "Ashmon", "El shohdaa", "Tala"],
+  },
+  {
+    name: "Matrouh",
+    areas: [
+      "Gowsna",
+      "El Bagor",
+      "Seewaa",
+      "El Saloom",
+      "Cedy Brany",
+      "El Nagela",
+      "El Dabaa",
+      "El Alamen",
+      "El Hmam",
+    ],
+  },
+  {
+    name: "Luxor",
+    areas: ["Armant", "Asna", "El-Karnak", "El bayadya", "El tod", "El zenya"],
+  },
+  {
+    name: "Sharm ElSheikh",
+    areas: ["Taba", "Dahab", "Ras seder", "NwebaSant Katreen"],
+  },
+  {
+    name: "Kafr ElSheik",
+    areas: ["Desook", "Baltem", "Bela", "El Reyaid", "Klean", "El hamol"],
+  },
+  {
+    name: "Suez",
+    areas: ["Abo rades", "Abo Zanyma", "Ataka", "El Arbaen", "El Ganayen"],
+  },
+  {
+    name: "Sohag",
+    areas: [
+      "Akhmem",
+      "El balyana",
+      "El-Mragha",
+      "Gerga",
+      "Tema",
+      "El Monshaa",
+      "Saklta",
+      "Tahta",
+    ],
+  },
+  {
+    name: "Qena",
+    areas: [
+      "Abo tesht",
+      "Naga Hamady",
+      "Deshna",
+      "Elrfaf",
+      "Nkada",
+      "Kos",
+      "El waf",
+    ],
+  },
+];
 
 const AddDoctor = () => {
+  const [{ city, area }, setData] = useState({
+    city: "Alexandria",
+    area: "",
+  });
+  const cities = citiesData.map((city) => (
+    <option key={city.name} value={city.name}>
+      {city.name}
+    </option>
+  ));
+  const areas = citiesData
+    .find((item) => item.name === city)
+    ?.areas.map((area) => (
+      <option key={area} value={area}>
+        {area}
+      </option>
+    ));
+  function handleCityChange(event) {
+    setData((data) => ({ area: "", city: event.target.value }));
+  }
+  function handleAreaChange(event) {
+    setData((data) => ({ ...data, area: event.target.value }));
+  }
+  const categories = [
+    "Allergy and Immunology (Sensitivity and Immunity)",
+    "Andrology and Male Infertility",
+    "Audiology",
+    "Cardiology and Thorcic Surgery (Heart / Chest)",
+    "Cardiology and Vascular Disease (Heart)",
+    "Chest and Respiratory",
+    "Dentistry (Teeth)",
+    "Dermatology (Skin)",
+    "Diabetes and Endocrinology",
+    "Diagnostic Radiology",
+    "Dietician and Nutrition",
+    "Ear, Nose and Throat",
+    "Family medicine",
+    "Gastroenterology and Endoscopy",
+    "General Pracitce",
+    "General Surgery",
+    "Geriatrics (Old People Health)",
+    "Gynaecology and Infertility",
+    "Hematology",
+    "Hepatology (Liver Doctor)",
+  ];
   return (
     <>
       <div className="container-fluid content">
@@ -70,10 +332,9 @@ const AddDoctor = () => {
                         id="mySelect"
                         name="drCategory"
                       >
-                        <option name="drCity">Choose Category</option>
-                        {/* <option *ngFor="let cat of DoctorCategory" [value]="cat.name">
-                      {{ cat.name }}
-                    </option> */}
+                        {categories.map((x, y) => (
+                          <option key={y}>{x}</option>
+                        ))}
                       </select>
                     </div>
                   </div>
@@ -84,11 +345,10 @@ const AddDoctor = () => {
                         className="input-field input-lg valid formInputs"
                         id="selectCity"
                         name="drCity"
+                        value={city}
+                        onChange={handleCityChange}
                       >
-                        <option name="drCity">Choose City</option>
-                        {/* // <option *ngFor="let city of cities" [value]="city.id">
-                    //   {{ city.name }}
-                    // </option> */}
+                        {cities}
                       </select>
                     </div>
                   </div>
@@ -99,14 +359,10 @@ const AddDoctor = () => {
                         id="selectArea"
                         name="drArea"
                         className="input-field input-lg formInputs"
+                        value={area}
+                        onChange={handleAreaChange}
                       >
-                        <option value="0" id="drArea" name="drArea" selected>
-                          {" "}
-                          Choose Area
-                        </option>
-                        {/* <option  id="drArea" name="drArea"   [value]="area.id" *ngFor="let area of areas">
-                      {{area.name}}
-                    </option> */}
+                        {areas}
                       </select>
                     </div>
                   </div>
