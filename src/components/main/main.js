@@ -1,7 +1,32 @@
 import "./main.css";
 import hello from "../../assets/avatar-svgrepo-com.svg";
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link, useNavigate } from "react-router-dom";
+import firebase from "../../fbconifq/fbAuth";
 
 const Main = () => {
+  const [user, loading, error] = useAuthState(firebase.auth());
+  const [name, setName] = useState("");
+  const history = useNavigate();
+  const fetchUserName = async () => {
+    try {
+      const query = await firebase.firestore()
+        .collection("users")
+        .where("uid", "==", user?.uid)
+        .get();
+      const data = await query.docs[0].data();
+      setName(data.name);
+    } catch (err) {
+      console.error(err);
+      alert("An error occured while fetching user data");
+    }
+  };
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return history.replace("/");
+    fetchUserName();
+  }, [user, loading]);
   return (
     <main>
       <div className="main__container">
@@ -9,8 +34,9 @@ const Main = () => {
         <div className="main__title">
           <img src={hello} alt="hello" />
           <div className="main__greeting">
-            <h1>Hello in clinido</h1>
+            <h1>Hello {name} in clinido</h1>
             <p>Welcome to your admin dashboard</p>
+            <p>your email {user?.email}</p>
           </div>
         </div>
 

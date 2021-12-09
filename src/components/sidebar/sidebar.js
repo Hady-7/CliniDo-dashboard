@@ -1,10 +1,15 @@
 import "./sidebar.css";
 import logo from "../../assets/avatar-svgrepo-com.svg";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import firebase from "../../fbconifq/fbAuth";
 import 'react-pro-sidebar/dist/css/styles.css';
 
 const Sidebar = ({ sidebarOpen, closeSidebar }) => {
+  const history = useNavigate();
+
+ 
+
   return (
     <div className={sidebarOpen ? "sidebar_responsive" : ""} id="sidebar">
       <div className="sidebar__title">
@@ -65,7 +70,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
         </div> */}
         <div className="sidebar__logout">
           <i className="fas fa-power-off"></i>
-          <a href="#">Log out</a>
+          <a>Log out</a>
         </div>
       </div>
     </div>
