@@ -1,5 +1,7 @@
 import "./navbar.css";
 import avatar from "../../assets/avatar-svgrepo-com.svg";
+import Dropdown from "react-bootstrap/Dropdown";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ sidebarOpen, openSidebar }) => {
   return (
@@ -19,9 +21,26 @@ const Navbar = ({ sidebarOpen, openSidebar }) => {
         <a href="#">
           <i className="fas fa-clock" aria-hidden="true"></i>
         </a>
-        <a href="#!">
+
+        <Dropdown>
+          <Dropdown.Toggle id="dropdown-basic">
+            <img width="30" src={avatar} alt="avatar" />
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">
+              {" "}
+              <i class="fas fa-user"></i> Profile
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-2">
+              {" "}
+              <i class="fas fa-cog"></i> Settings
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        {/* <a href="#!">
           <img width="30" src={avatar} alt="avatar" />
-        </a>
+        </a> */}
       </div>
     </nav>
   );

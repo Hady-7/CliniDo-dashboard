@@ -15,7 +15,7 @@
   margin-bottom: 30px;
   /* color: #E85B6B; */
 }
-#span{
+#span {
   color: #2867db;
 }
 .sidebar__img {
@@ -106,5 +106,15 @@
 
   .sidebar__title > i {
     display: inline;
+  }
+}
+@media (min-width: 576px) {
+  .sidebar_responsive {
+    right: 0;
+  }
+}
+@media (min-width: 992px) {
+  .sidebar_responsive {
+    position: relative;
   }
 }
