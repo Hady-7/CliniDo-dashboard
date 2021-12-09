@@ -103,9 +103,8 @@
 
 @media (min-width: 910px) {
   .content {
-    padding-right: 107px;
-    padding-left: 86px;
     width: 150%;
+    overflow: hidden;
   }
 }
 /* @media (min-width: 992px) {

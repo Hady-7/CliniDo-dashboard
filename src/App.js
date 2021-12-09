@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar/navbar";
 import Sidebar from "./components/sidebar/sidebar";
-import Main from "./components/main/main"
-import DoctorList from "./components/doctor/doctor-list/doctorList"
-import AddDoctor from "./components/doctor/add-doctor/addDoctor"
-import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import Main from "./components/main/main";
+import DoctorList from "./components/doctor/doctor-list/doctorList";
+import AddDoctor from "./components/doctor/add-doctor/addDoctor";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import UserList from "./components/users/userList/userList";
 import Adduser from "./components/users/addUser/adduser";
 import Login from "./Auth/login/login";
+import { ProtectedRoute } from "./components/guard/protectedRoute";
 function App() {
+  const [isAuth, setIsAuth] = useState(false);
   const [sidebarOpen, setsidebarOpen] = useState(false);
   const openSidebar = () => {
     setsidebarOpen(true);
@@ -19,28 +21,31 @@ function App() {
   };
   return (
     <div className="container1">
-      
       <Router>
-      <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
-      <Routes>
-      <Route exact path="/" element={<Login />} />
-      <Route exact  path="dashboard" element={<Main />} />
-      <Route exact  path="doctor-list" element={<DoctorList />} />
-      <Route exact  path="add-doctor" element={<AddDoctor />} />
-      <Route exact  path="user-list" element={<UserList />} />
-      <Route exact  path="add-user" element={<Adduser />} />
-      <Route
-      path="*"
-      element={
-        <main style={{ padding: "1rem" }}>
-          <p>There's nothing here!</p>
-        </main>
-      }
-    />
-      </Routes>
-      <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
-      </Router>
+        <Fragment>
+          <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
+          <Routes>
+            <Route exact path="/" element={<Login />} />
+            <Route path="dashboard" element={ProtectedRoute} isAuth={isAuth}>
+              <Route exact path="dashboard" element={<Main />} />
 
+              <Route exact path="doctor-list" element={<DoctorList />} />
+              <Route exact path="add-doctor" element={<AddDoctor />} />
+              <Route exact path="user-list" element={<UserList />} />
+              <Route exact path="add-user" element={<Adduser />} />
+            </Route>
+            <Route
+              path="*"
+              element={
+                <main style={{ padding: "1rem" }}>
+                  <p>There's nothing here!</p>
+                </main>
+              }
+            />
+          </Routes>
+          <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
+        </Fragment>
+      </Router>
     </div>
   );
 }
