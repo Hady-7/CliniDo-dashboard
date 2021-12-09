@@ -19,7 +19,7 @@ function App() {
   };
   return (
     <div className="container1">
-
+      
       <Router>
       <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
       <Routes>

@@ -85,6 +85,7 @@
   color: #e65061;
   font-weight: 700;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .sidebar__logout > i {

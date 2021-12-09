@@ -9,7 +9,7 @@ import "./login.css";
 function Login() {
   const history = useNavigate();
   const mailreg=/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
-  // const pwreg=/^[0-9]{6,20}$/;
+  const pwreg=/^[0-9]{6,20}$/;
 const [user, setUser] = useState({
   emailAddress: "",
   password: "",
@@ -39,7 +39,17 @@ if (e.target.name === "emailAddress") {
       ...user,
       password: e.target.value,
     });
-
+if (pwreg.test(e.target.value)) {
+      setUserErrors({
+        ...userErrors,
+        password: null,
+      });
+    } else {
+      setUserErrors({
+        ...userErrors,
+        password: "please enter 6 digits",
+      });
+    }
   }
 
   };
@@ -48,7 +58,7 @@ const submitLogin = (e) => {
       e.preventDefault();
       if(!userErrors.emailAddress &&!userErrors.password){
          firebase.auth().signInWithEmailAndPassword(user.emailAddress,user.password).then((res)=>{
-           console.log(res);
+           localStorage.setItem("token",res.user.refreshToken)
            history("/dashboard")
          }).catch(err=>{window.alert(err.code)})
       }

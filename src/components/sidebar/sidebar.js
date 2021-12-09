@@ -6,10 +6,14 @@ import firebase from "../../fbconifq/fbAuth";
 import 'react-pro-sidebar/dist/css/styles.css';
 
 const Sidebar = ({ sidebarOpen, closeSidebar }) => {
-  const history = useNavigate();
-
- 
-
+const handleLogout = () => {
+    firebase.auth().signOut().then(()=>{
+      localStorage.removeItem("token")
+      console.log("signed out");
+    }).catch(err => {
+      console.log("error");
+    })
+}
   return (
     <div className={sidebarOpen ? "sidebar_responsive" : ""} id="sidebar">
       <div className="sidebar__title">
@@ -58,19 +62,10 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
               </SubMenu>
             </Menu>
         </ProSidebar>
-       
-        {/* <div className="sidebar__link">
-          <i className="fas fa-user-secret"></i>
-          <Link to="/doctor">Doctors Management</Link>
-
-        </div>
-        <div className="sidebar__link">
-          <i className="fas fa-user-secret"></i>
-          <Link to="/user">Users Management</Link>
-        </div> */}
+      
         <div className="sidebar__logout">
           <i className="fas fa-power-off"></i>
-          <a>Log out</a>
+          <a onClick={()=>{handleLogout()}}>Log out</a>
         </div>
       </div>
     </div>

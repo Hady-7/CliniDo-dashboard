@@ -41,6 +41,11 @@ const DoctorList = () => {
       border: 0,
     },
   }));  
+  const handlDelete = (id) => {
+    firebase.firestore().collection('Doctor').doc(id).delete()
+        .then(()=>{console.log("successfully deleted! ")})
+        .catch((error)=>{ console.log("Error removing document:", error)})
+  }
   return (
     <main>
     <div className="main__container">
@@ -50,10 +55,11 @@ const DoctorList = () => {
       <TableHead>
         <TableRow>
           <StyledTableCell>Names</StyledTableCell>
-          <StyledTableCell >category</StyledTableCell>
-          <StyledTableCell >city</StyledTableCell>
-          <StyledTableCell >area</StyledTableCell>
-          <StyledTableCell >phone</StyledTableCell>
+          <StyledTableCell >Category</StyledTableCell>
+          <StyledTableCell >City</StyledTableCell>
+          <StyledTableCell >Area</StyledTableCell>
+          <StyledTableCell >Phone</StyledTableCell>
+          <StyledTableCell >Edit or Delete</StyledTableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -66,6 +72,7 @@ const DoctorList = () => {
             <StyledTableCell>{row.drCity}</StyledTableCell>
             <StyledTableCell >{row.drArea}</StyledTableCell>
             <StyledTableCell >{row.mobile}</StyledTableCell>
+            <StyledTableCell ><i className="fas fa-edit pe-2 text-center"></i><i className="fas fa-trash-alt" onClick={() => handlDelete(row.id)}></i></StyledTableCell>
           </StyledTableRow>
         ))}
       </TableBody>
