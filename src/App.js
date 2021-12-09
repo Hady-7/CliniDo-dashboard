@@ -8,6 +8,7 @@ import AddDoctor from "./components/doctor/add-doctor/addDoctor"
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import UserList from "./components/users/userList/userList";
 import Adduser from "./components/users/addUser/adduser";
+import Login from "./Auth/login/login";
 function App() {
   const [sidebarOpen, setsidebarOpen] = useState(false);
   const openSidebar = () => {
@@ -22,7 +23,8 @@ function App() {
       <Router>
       <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
       <Routes>
-      <Route exact  path="/" element={<Main />} />
+      <Route exact path="/" element={<Login />} />
+      <Route exact  path="dashboard" element={<Main />} />
       <Route exact  path="doctor-list" element={<DoctorList />} />
       <Route exact  path="add-doctor" element={<AddDoctor />} />
       <Route exact  path="user-list" element={<UserList />} />

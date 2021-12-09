@@ -1,6 +1,7 @@
-import "./addDoctor.css";
+import React from "react";
+import "./editDoctor.css";
 
-const AddDoctor = () => {
+function EditDoctor() {
   return (
     <>
       <div className="container-fluid content">
@@ -217,6 +218,6 @@ const AddDoctor = () => {
       </div>
     </>
   );
-};
+}
 
-export default AddDoctor;
+export default EditDoctor;

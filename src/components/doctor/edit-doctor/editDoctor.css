@@ -109,10 +109,10 @@
   }
 }
 /* @media (min-width: 992px) {
-  .col-md-6 {
-    width: 50% !important;
-  }
-  .col-md-12 {
-    width: 100% !important;
-  }
-} */
+    .col-md-6 {
+      width: 50% !important;
+    }
+    .col-md-12 {
+      width: 100% !important;
+    }
+  } */
