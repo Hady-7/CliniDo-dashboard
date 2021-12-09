@@ -111,6 +111,8 @@
 @media (min-width: 576px) {
   .sidebar_responsive {
     right: 0;
+    bottom: 0;
+    top: 0;
   }
 }
 @media (min-width: 992px) {

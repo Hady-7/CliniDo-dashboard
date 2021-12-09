@@ -1,7 +1,6 @@
 import "./navbar.css";
 import avatar from "../../assets/avatar-svgrepo-com.svg";
 import Dropdown from "react-bootstrap/Dropdown";
-import { Link } from "react-router-dom";
 
 const Navbar = ({ sidebarOpen, openSidebar }) => {
   return (
