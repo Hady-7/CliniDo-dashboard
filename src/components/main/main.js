@@ -25,7 +25,7 @@ const Main = () => {
   };
   useEffect(() => {
     if (loading) return;
-    if (!user) return history.replace("/");
+    if (!user) return history("/");
     fetchUserName();
   }, [user, loading]);
   return (
