@@ -48,7 +48,7 @@ main {
     background: #ffffff;
     box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
   }
-  
+ 
   .card_inner {
     display: flex;
     align-items: center;

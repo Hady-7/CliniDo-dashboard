@@ -17,7 +17,7 @@ const Main = () => {
         <div className="main__cards">
           <div className="card">
             <i
-              className="fas fa-user fa-2x text-lightblue"
+              className="fas fa-user fa-2x text-lightblue fs-4"
               aria-hidden="true"
             ></i>
             <div className="card_inner">
@@ -27,7 +27,7 @@ const Main = () => {
           </div>
 
           <div className="card">
-            <i className="fa fa-calendar fa-2x text-red" aria-hidden="true"></i>
+            <i className="fa fa-calendar fa-2x text-red fs-4" aria-hidden="true"></i>
             <div className="card_inner">
               <p className="text-primary-p">Number of booking</p>
               <span className="font-bold text-title">2467</span>
@@ -36,7 +36,7 @@ const Main = () => {
 
           <div className="card">
             <i
-              className="fas fa-user fa-2x text-yellow"
+              className="fas fa-user fa-2x text-yellow fs-4"
               aria-hidden="true"
             ></i>
             <div className="card_inner">
@@ -47,7 +47,7 @@ const Main = () => {
 
           <div className="card">
             <i
-              className="fa fa-thumbs-up fa-2x text-green"
+              className="fa fa-thumbs-up fa-2x text-green fs-4"
               aria-hidden="true"
             ></i>
             <div className="card_inner">

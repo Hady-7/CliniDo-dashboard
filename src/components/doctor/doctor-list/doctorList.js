@@ -1,9 +1,10 @@
 import "./doctorList.css";
-import db from "../../../fbconifq/firebaseConfiq";
+import firebase from "../../../fbconifq/fbAuth";
 import { onSnapshot, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 const DoctorList = () => {
+  const db = firebase.firestore()
   const [doctor, setDoctor] = useState([]);
   useEffect(() => 
     onSnapshot(collection(db, "Doctor"), (snapshot) => {
