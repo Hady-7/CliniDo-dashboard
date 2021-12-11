@@ -5,6 +5,7 @@ import Sidebar from "./components/sidebar/sidebar";
 import Main from "./components/main/main";
 import DoctorList from "./components/doctor/doctor-list/doctorList";
 import AddDoctor from "./components/doctor/add-doctor/addDoctor";
+import EditDoctor from "./components/doctor/edit-doctor/editDoctor";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import UserList from "./components/users/userList/userList";
 import Adduser from "./components/users/addUser/adduser";
@@ -26,14 +27,13 @@ function App() {
           <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
           <Routes>
             <Route exact path="/" element={<Login />} />
-            <Route path="dashboard" element={ProtectedRoute} isAuth={isAuth}>
               <Route exact path="dashboard" element={<Main />} />
 
               <Route exact path="doctor-list" element={<DoctorList />} />
               <Route exact path="add-doctor" element={<AddDoctor />} />
+              <Route exact path="edit-doctor/:id" element={<EditDoctor />} />
               <Route exact path="user-list" element={<UserList />} />
               <Route exact path="add-user" element={<Adduser />} />
-            </Route>
             <Route
               path="*"
               element={

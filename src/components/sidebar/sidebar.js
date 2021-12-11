@@ -38,7 +38,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
       <div className="sidebar__menu">
         <div className="sidebar__link">
           <i className="fas fa-home"></i>
-          <Link to="/">Dashboard</Link>
+          <Link to="dashboard">Dashboard</Link>
         </div>
         <h2>MNG</h2>
         <ProSidebar style={{ marginTop: "15px" }}>

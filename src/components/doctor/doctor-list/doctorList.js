@@ -10,6 +10,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { useNavigate } from "react-router-dom";
 
 const DoctorList = () => {
   const db = firebase.firestore();
@@ -39,7 +40,6 @@ const DoctorList = () => {
     "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.action.hover,
     },
-    // hide last border
     "&:last-child td, &:last-child th": {
       border: 0,
     },
@@ -57,6 +57,10 @@ const DoctorList = () => {
         console.log("Error removing document:", error);
       });
   };
+  const navigate = useNavigate()
+  const handleEdit = (id) =>{
+    navigate(`../edit-doctor/${id}`)
+  }
   return (
     <main>
       <div className="main__container">
@@ -84,7 +88,9 @@ const DoctorList = () => {
                   <StyledTableCell>{row.drArea}</StyledTableCell>
                   <StyledTableCell>{row.mobile}</StyledTableCell>
                   <StyledTableCell>
-                    <i className="fas fa-edit pe-2 text-center"></i>
+                    <i className="fas fa-edit pe-2 text-center" onClick={()=>handleEdit(row.id)}>
+                     
+                    </i>
                     <i
                       className="fas fa-trash-alt"
                       onClick={() => handlDelete(row.id)}
