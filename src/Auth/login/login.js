@@ -10,6 +10,7 @@ function Login(props) {
   const history = useNavigate();
   const mailreg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
   const pwreg = /^[0-9]{6,20}$/;
+ 
   const [user, setUser] = useState({
     emailAddress: "",
     password: "",
@@ -61,6 +62,7 @@ function Login(props) {
         .then((res) => {
           localStorage.setItem("token", res.user.refreshToken);
           history("/dashboard");
+          window.location.reload()
         })
         .catch((err) => {
           window.alert(err.code);
