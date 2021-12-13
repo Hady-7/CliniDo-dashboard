@@ -11,6 +11,7 @@ import UserList from "./components/users/userList/userList";
 import Adduser from "./components/users/addUser/adduser";
 
 import Login from "./Auth/login/login";
+import Reg from "./Auth/Reg/reg";
 import { ProtectedRoute } from "./components/guard/protectedRoute";
 function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -27,11 +28,12 @@ function App() {
       <Router>
         <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
         <Routes>
-          <Route exact path="/" element={<Login />} />
+        <Route exact path="/" element={<Login />} />
           {!localStorage.getItem("token") ? (
             <Route path="dashboard" element={ProtectedRoute} isAuth={isAuth}>
               <Route exact path="dashboard" element={<Main />} />
               <Route exact path="doctor-list" element={<DoctorList />} />
+              <Route exact path="register" element={<Reg />} />
               <Route exact path="add-doctor" element={<AddDoctor />} />
               <Route exact path="edit-doctor/:id" element={<EditDoctor />} />
               <Route exact path="user-list" element={<UserList />} />
@@ -40,9 +42,10 @@ function App() {
           ) : (
             <>
               <Route exact path="dashboard" element={<Main />} />
-
+              <Route exact path="register" element={<Reg />} />
               <Route exact path="doctor-list" element={<DoctorList />} />
               <Route exact path="add-doctor" element={<AddDoctor />} />
+              <Route exact path="edit-doctor/:id" element={<EditDoctor />} />
               <Route exact path="user-list" element={<UserList />} />
               <Route exact path="add-user" element={<Adduser />} />
             </>

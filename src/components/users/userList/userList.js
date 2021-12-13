@@ -10,8 +10,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 const UserList = () => {
+  const [users, loading, error] = useAuthState(firebase.auth());
+  const history = useNavigate();
+  
+  useEffect(() => {
+    if (loading) return;
+    if (!users) return history("/");
+  }, [users, loading]);
   const db = firebase.firestore();
   const [user, setuser] = useState([]);
   useEffect(
@@ -45,6 +54,19 @@ const UserList = () => {
       border: 0,
     },
   }));
+  const handlDelete = (id) => {
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(id)
+      .delete()
+      .then(() => {
+        console.log("successfully deleted! ");
+      })
+      .catch((error) => {
+        console.log("Error removing document:", error);
+      });
+  };
   return (
     <main>
       <div className="main__container">
@@ -55,6 +77,7 @@ const UserList = () => {
               <TableRow>
                 <StyledTableCell>Email</StyledTableCell>
                 <StyledTableCell>uuid</StyledTableCell>
+                <StyledTableCell>Edit or Delete</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -65,6 +88,9 @@ const UserList = () => {
                   </StyledTableCell>
                   <StyledTableCell>
                     {row.uid} 
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    <i className="fas fa-trash-alt" onClick={() => handlDelete(row.id)}></i>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

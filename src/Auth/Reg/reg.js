@@ -3,10 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { app } from "../../fbconifq/fbAuth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../fbconifq/fbAuth";
-import "./login.css";
+import "./req.css";
 
-function Login(props) {
-  const [isAuth, setIsAuth] = useState(false);
+function Reg(props) {
   const history = useNavigate();
   const mailreg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
   const pwreg = /^[0-9]{6,20}$/;
@@ -14,6 +13,7 @@ function Login(props) {
   const [user, setUser] = useState({
     emailAddress: "",
     password: "",
+    displayName:""
   });
   const [userErrors, setUserErrors] = useState({
     emailAddress: null,
@@ -21,6 +21,13 @@ function Login(props) {
   });
 
   const handleInputChange = (e) => {
+    if (e.target.name === "displayName"){
+        setUser({
+            ...user,
+            displayName:e.target.value
+        })
+    }
+    
     if (e.target.name === "emailAddress") {
       setUser({
         ...user,
@@ -52,35 +59,22 @@ function Login(props) {
       }
     }
   };
-  // const SetUserData = (user)=> {
-  //   const userRef = this.firebase.firestore().doc(`users/${user.uid}`);
-  //   this.userData  = {
-  //     uid: user.uid,
-  //     email: user.email,
-  //     displayName: user.displayName,
-  //     photoURL: user.photoURL,
-  //     emailVerified: user.emailVerified
-  //   }
-  //   return userRef.set(this.userData, {
-  //     merge: true
-  //   })
-  // }
-  const submitLogin = (e) => {
-    e.preventDefault();
-    if (!userErrors.emailAddress && !userErrors.password) {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(user.emailAddress, user.password)
-        .then((res) => {
-          console.log(res);
-          localStorage.setItem("token", res.user.refreshToken);
-          history("/dashboard");
-          window.location.reload()
-        })
-        .catch((err) => {
-          window.alert(err.code);
-        });
-    }
+ 
+  const Register = async (e) => {
+        e.preventDefault();
+        await firebase.auth().createUserWithEmailAndPassword(user.emailAddress, user.password).then( result => {
+            firebase.firestore().collection("Admin").add({
+            uid: result.user?.uid,
+            email: result.user?.email,
+            displayName: user.displayName,
+            photoURL: result.user?.photoURL,
+            emailVerified: result.user?.emailVerified
+            })
+            history("/");
+        }).catch(err => {
+            console.error(err);
+            alert(err.message);
+        }) 
   };
 
   return (
@@ -98,7 +92,7 @@ function Login(props) {
 
               <div className="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
                 <div className="d-flex align-items-center px-5 ms-xl-4  pt-xl-0 mt-xl-n5 mt-5 ">
-                  <form id="forma" onSubmit={(e) => submitLogin(e)}>
+                  <form id="forma" onSubmit={(e) => Register(e)}>
                     <h3
                       className="fw-bold mb-3 pb-3"
                       style={{
@@ -107,12 +101,29 @@ function Login(props) {
                         textAlign: "center",
                       }}
                     >
-                      Log in
+                      Add New Admin
                     </h3>
 
                     <div className="form-outline mb-4">
                       <label className="form-label" for="form2Example18">
-                        Email address OR User name
+                        userName 
+                      </label>
+                      <input
+                        type="text"
+                        id="form2Example18"
+                        className="form-control form-control-lg "
+                        name="displayName"
+                        required
+                        value={user.displayName}
+                        onChange={(e) => handleInputChange(e)}
+                        style={{ width: "100%" }}
+                      />
+                     
+                    </div>
+
+                    <div className="form-outline mb-4">
+                      <label className="form-label" for="form2Example18">
+                        Email address 
                       </label>
                       <input
                         type="email"
@@ -149,17 +160,15 @@ function Login(props) {
                     </div>
 
                     <div className="pt-1 mb-4">
+                      
                       <button
                         className="btn btn-lg btn-block"
                         style={{ backgroundColor: "#38b9db", color: "white" }}
                         type="submit"
-                        onClick={() => {
-                          setIsAuth(true);
-                        }}
                       >
-                        Login
+
+                        Register 
                       </button>
-                      
                     </div>
                   </form>
                 </div>
@@ -183,4 +192,4 @@ function Login(props) {
     </main>
   );
 }
-export default Login;
+export default Reg;

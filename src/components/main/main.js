@@ -3,21 +3,24 @@ import hello from "../../assets/avatar-svgrepo-com.svg";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import firebase from "../../fbconifq/fbAuth";
 
 const Main = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
   const [name, setName] = useState("");
+  const [Doctorsize, setDoctorSize] = useState(0);
+  const [BookingSize, setBooking] = useState(0);
+  const [userSize, setUserSize] = useState(0);
   const history = useNavigate();
   const fetchUserName = async () => {
     try {
       const query = await firebase.firestore()
-        .collection("users")
+        .collection("Admin")
         .where("uid", "==", user?.uid)
         .get();
       const data = await query.docs[0].data();
-      setName(data.name);
+      setName(data.displayName);
     } catch (err) {
       console.error(err);
       alert("An error occured while fetching user data");
@@ -27,6 +30,15 @@ const Main = () => {
     if (loading) return;
     if (!user) return history("/");
     fetchUserName();
+    firebase.firestore().collection("Doctor").get().then(res => {
+      setDoctorSize(res.size)
+    })
+    firebase.firestore().collection("Booking").get().then(res => {
+      setBooking(res.size)
+    })
+    firebase.firestore().collection("users").get().then(res => {
+      setUserSize(res.size)
+    })
   }, [user, loading]);
   return (
     <main>
@@ -49,7 +61,7 @@ const Main = () => {
             ></i>
             <div className="card_inner">
               <p className="text-primary-p">Number of Doctors</p>
-              <span className="font-bold text-title">578</span>
+              <span className="font-bold text-title">{Doctorsize}</span>
             </div>
           </div>
 
@@ -57,7 +69,7 @@ const Main = () => {
             <i className="fa fa-calendar fa-2x text-red fs-4" aria-hidden="true"></i>
             <div className="card_inner">
               <p className="text-primary-p">Number of booking</p>
-              <span className="font-bold text-title">2467</span>
+              <span className="font-bold text-title">{BookingSize}</span>
             </div>
           </div>
 
@@ -68,7 +80,7 @@ const Main = () => {
             ></i>
             <div className="card_inner">
               <p className="text-primary-p">Number of users</p>
-              <span className="font-bold text-title">340</span>
+              <span className="font-bold text-title">{userSize}</span>
             </div>
           </div>
 
@@ -93,7 +105,6 @@ const Main = () => {
 };
 
 export default Main;
-
 
 
 

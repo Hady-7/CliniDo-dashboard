@@ -1,6 +1,9 @@
 import "./addDoctor.css";
 import React, { useState ,useEffect} from "react";
 import firebase from "../../../fbconifq/fbAuth";
+import { useAuthState } from "react-firebase-hooks/auth";
+
+import { Link, useNavigate } from "react-router-dom";
 
 const citiesData = [
   {
@@ -220,6 +223,14 @@ const citiesData = [
 ];
 
 const AddDoctor = () => {
+  const [user, loading, error] = useAuthState(firebase.auth());
+const history = useNavigate();
+
+useEffect(() => {
+  if (loading) return;
+  if (!user) return history("/");
+}, [user, loading]);
+
   const [firstName,setFirstname] = useState('')
   const [lastName,setlastname] = useState('')
   const [mobile,setMobile] = useState(0)

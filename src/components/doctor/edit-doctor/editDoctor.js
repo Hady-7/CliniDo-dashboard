@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./editDoctor.css";
+import firebase from "../../../fbconifq/fbAuth";
+import { useParams,useNavigate } from 'react-router-dom';
+import { useAuthState } from "react-firebase-hooks/auth";
+
 const citiesData = [
   {
     name: "Alexandria",
@@ -218,6 +222,24 @@ const citiesData = [
 ];
 
 function EditDoctor() {
+  const [user, loading, error] = useAuthState(firebase.auth());
+  const history = useNavigate();
+  
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return history("/");
+  }, [user, loading]);
+  const { id } = useParams()
+  const [firstName,setFirstname] = useState('')
+  const [lastName,setlastname] = useState('')
+  const [mobile,setMobile] = useState(0)
+  const [drCategory,setSpec] = useState('')
+  const [drCity,setCity] = useState('')
+  const [drArea,setArea] = useState('')
+  const [image,setImg] = useState('')
+  const [addr,setAddr] = useState('')
+  const [fees,setFees] = useState(0)
+  const [time,setTime] = useState(0)
   const [{ city, area }, setData] = useState({
     city: "Alexandria",
     area: "",
@@ -236,9 +258,11 @@ function EditDoctor() {
     ));
   function handleCityChange(event) {
     setData((data) => ({ area: "", city: event.target.value }));
+    setCity(event.target.value)
   }
   function handleAreaChange(event) {
     setData((data) => ({ ...data, area: event.target.value }));
+    setArea(event.target.value)
   }
   const categories = [
     "Allergy and Immunology (Sensitivity and Immunity)",
@@ -262,16 +286,25 @@ function EditDoctor() {
     "Hematology",
     "Hepatology (Liver Doctor)",
   ];
+
+  const form = (e) => {
+    e.preventDefault();
+    firebase.firestore().collection("Doctor").doc(id).update({firstName,lastName,mobile,drCategory,drCity,drArea,image,addr,fees,time}).then(
+      res => console.log("added succesfully")
+    ).catch(
+      err => console.log(err.code)
+    )
+  }
   return (
     <>
-      <div className="container-fluid content">
+    <div className="container-fluid content">
         <div className="title">
           <h1>Add Doctor</h1>
         </div>
         <div className="areYouDoctorForm">
           <div className="container-fluid">
             <div className="sign">
-              <form className="global" id="xyz" novalidate="novalidate">
+              <form className="global" id="xyz" novalidate="novalidate"  onSubmit={(e) => form(e)}>
                 <input type="hidden" name="_token" value="" />
                 <div className="row formRow">
                   <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 formCol">
@@ -285,6 +318,7 @@ function EditDoctor() {
                         placeholder="Type Your First Name Here..."
                         autocomplete="off"
                         required
+                        onChange={(e)=>{setFirstname(e.target.value)}}
                       />
                     </div>
                   </div>
@@ -298,6 +332,7 @@ function EditDoctor() {
                         name="lastName"
                         placeholder="Type Your Last Name Here..."
                         autocomplete="off"
+                        onChange={(e)=>{setlastname(e.target.value)}}
                       />
                     </div>
                   </div>
@@ -320,6 +355,7 @@ function EditDoctor() {
                         autocomplete="off"
                         data-intl-tel-input-id="0"
                         placeholder="Enter Your Phone Number "
+                        onChange={(e)=>{setMobile(e.target.value)}}
                       />
                     </div>
                   </div>
@@ -330,6 +366,7 @@ function EditDoctor() {
                         className="input-field input-lg formInputs"
                         id="mySelect"
                         name="drCategory"
+                        onChange={(e)=>{setSpec(e.target.value)}}
                       >
                         {categories.map((x, y) => (
                           <option key={y}>{x}</option>
@@ -374,6 +411,7 @@ function EditDoctor() {
                         name="img"
                         placeholder="Enter Image URL"
                         type={"url"}
+                        onChange={(e)=>{setImg(e.target.value)}}
                       />
                     </div>
                   </div>
@@ -386,6 +424,7 @@ function EditDoctor() {
                         name="fees"
                         placeholder="Enter Doctor Fees"
                         type={"number"}
+                        onChange={(e)=>{setFees(e.target.value)}}
                       />
                     </div>
                   </div>
@@ -398,6 +437,8 @@ function EditDoctor() {
                         name="address"
                         placeholder="Enter Doctor Address"
                         type={"text"}
+                        onChange={(e)=>{setAddr(e.target.value)}}
+
                       />
                     </div>
                   </div>
@@ -409,7 +450,9 @@ function EditDoctor() {
                         className="form-control input-lg center formInputs"
                         name="waiting"
                         placeholder="Enter Waiting time"
-                        type={"time"}
+                        type={"number"}
+                        onChange={(e)=>{setTime(e.target.value)}}
+
                       />
                     </div>
                   </div>

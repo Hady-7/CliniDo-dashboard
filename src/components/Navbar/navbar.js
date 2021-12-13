@@ -1,6 +1,7 @@
 import "./navbar.css";
 import avatar from "../../assets/avatar-svgrepo-com.svg";
 import Dropdown from "react-bootstrap/Dropdown";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ sidebarOpen, openSidebar }) => {
   return (
@@ -34,6 +35,10 @@ const Navbar = ({ sidebarOpen, openSidebar }) => {
             <Dropdown.Item href="#/action-2">
               {" "}
               <i class="fas fa-cog"></i> Settings
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-2">
+              {" "}
+              <i class="fas fa-cog"></i><Link to="register"> Add Admin</Link>
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

@@ -11,8 +11,16 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const DoctorList = () => {
+  const [user, loading, error] = useAuthState(firebase.auth());
+  const history = useNavigate();
+  
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return history("/");
+  }, [user, loading]);
   const db = firebase.firestore();
   const [doctor, setDoctor] = useState([]);
   useEffect(
