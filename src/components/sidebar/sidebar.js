@@ -68,10 +68,6 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
                 User List
                 <Link to="user-list" />
               </MenuItem>
-              <MenuItem>
-                Add user
-                <Link to="add-user" />
-              </MenuItem>
             </SubMenu>
           </Menu>
         </ProSidebar>

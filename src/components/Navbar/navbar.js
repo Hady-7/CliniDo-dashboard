@@ -30,15 +30,7 @@ const Navbar = ({ sidebarOpen, openSidebar }) => {
           <Dropdown.Menu>
             <Dropdown.Item href="#/action-1">
               {" "}
-              <i class="fas fa-user"></i> Profile
-            </Dropdown.Item>
-            <Dropdown.Item href="#/action-2">
-              {" "}
-              <i class="fas fa-cog"></i> Settings
-            </Dropdown.Item>
-            <Dropdown.Item href="#/action-2">
-              {" "}
-              <i class="fas fa-cog"></i><Link to="register"> Add Admin</Link>
+              <i class="fas fa-user"></i> Add Admin
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

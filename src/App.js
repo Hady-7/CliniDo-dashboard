@@ -8,7 +8,6 @@ import AddDoctor from "./components/doctor/add-doctor/addDoctor";
 import EditDoctor from "./components/doctor/edit-doctor/editDoctor";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import UserList from "./components/users/userList/userList";
-import Adduser from "./components/users/addUser/adduser";
 
 import Login from "./Auth/login/login";
 import Reg from "./Auth/Reg/reg";
@@ -28,7 +27,7 @@ function App() {
       <Router>
         <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
         <Routes>
-        <Route exact path="/" element={<Login />} />
+          <Route exact path="/" element={<Login />} />
           {!localStorage.getItem("token") ? (
             <Route path="dashboard" element={ProtectedRoute} isAuth={isAuth}>
               <Route exact path="dashboard" element={<Main />} />
@@ -37,7 +36,6 @@ function App() {
               <Route exact path="add-doctor" element={<AddDoctor />} />
               <Route exact path="edit-doctor/:id" element={<EditDoctor />} />
               <Route exact path="user-list" element={<UserList />} />
-              <Route exact path="add-user" element={<Adduser />} />
             </Route>
           ) : (
             <>
@@ -47,7 +45,6 @@ function App() {
               <Route exact path="add-doctor" element={<AddDoctor />} />
               <Route exact path="edit-doctor/:id" element={<EditDoctor />} />
               <Route exact path="user-list" element={<UserList />} />
-              <Route exact path="add-user" element={<Adduser />} />
             </>
           )}
 
