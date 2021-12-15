@@ -15,13 +15,6 @@ const Navbar = ({ sidebarOpen, openSidebar }) => {
         </a>
       </div>
       <div className="navbar__right">
-        <a href="#">
-          <i className="fas fa-search" aria-hidden="true"></i>
-        </a>
-        <a href="#">
-          <i className="fas fa-clock" aria-hidden="true"></i>
-        </a>
-
         <Dropdown>
           <Dropdown.Toggle id="dropdown-basic">
             <img width="30" src={avatar} alt="avatar" />
