@@ -3,9 +3,12 @@ import logo from "../../assets/avatar-svgrepo-com.svg";
 import { Link } from "react-router-dom";
 import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import firebase from "../../fbconifq/fbAuth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import "react-pro-sidebar/dist/css/styles.css";
 
 const Sidebar = ({ sidebarOpen, closeSidebar }) => {
+  const [user, loading, error] = useAuthState(firebase.auth());
+
   const handleLogout = () => {
     firebase
       .auth()
@@ -72,7 +75,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
           </Menu>
         </ProSidebar>
 
-        <div className="sidebar__logout">
+       {user &&  <div className="sidebar__logout">
           <i className="fas fa-power-off"></i>
           <a
             onClick={() => {
@@ -81,7 +84,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
           >
             Log out
           </a>
-        </div>
+        </div>}
       </div>
     </div>
   );

@@ -223,7 +223,7 @@ const citiesData = [
 ];
 
 const AddDoctor = () => {
-  const [user, loading, error] = useAuthState(firebase.auth());
+const [user, loading, error] = useAuthState(firebase.auth());
 const history = useNavigate();
 
 useEffect(() => {
@@ -237,7 +237,8 @@ useEffect(() => {
   const [drCategory,setSpec] = useState('')
   const [drCity,setCity] = useState('')
   const [drArea,setArea] = useState('')
-  const [image,setImg] = useState('')
+  const [image,setImg] = useState(null)
+  const [url, setUrl] = useState("");
   const [addr,setAddr] = useState('')
   const [fees,setFees] = useState(0)
   const [time,setTime] = useState(0)
@@ -287,13 +288,35 @@ useEffect(() => {
     "Hematology",
     "Hepatology (Liver Doctor)",
   ];
+  const handleImg = (e) => {
+    setImg(e.target.files[0])
+   
+  }
   const form = (e) => {
     e.preventDefault();
-    firebase.firestore().collection("Doctor").add({firstName,lastName,mobile,drCategory,drCity,drArea,image,addr,fees,time}).then(
-      res => console.log("added succesfully")
-    ).catch(
-      err => console.log(err.code)
-    )
+    if (image.name) {
+      firebase.storage().ref(`images/${image.name}`).put(image).on("state changed", 
+      snapshot => {},
+      error => {
+        console.log(error);
+      },() => {
+      firebase.storage().ref('images').child(image.name).getDownloadURL().then(url => {
+          setUrl(url);
+          console.log("image downloaded");
+          if(url !== ""){
+            firebase.firestore().collection("Doctor").add({firstName,lastName,mobile,drCategory,drCity,drArea,url,addr,fees,time}).then(
+              res => {
+                console.log("added done");
+                history("/doctor-list")
+              }
+            ).catch(
+              err => console.log(err.code)
+            )
+          }        })
+      })
+    }
+   
+    
   }
 
   return (
@@ -310,14 +333,14 @@ useEffect(() => {
                 <div className="row formRow">
                   <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 formCol">
                     <div className="form-group">
-                      <label for="firstName">First name</label>
+                      <label htmlFor="firstName">First name</label>
                       <input
                         id="firstName"
                         className="form-control input-lg formInputs"
                         type="text"
                         name="firstName"
                         placeholder="Type Your First Name Here..."
-                        autocomplete="off"
+                        autoComplete="off"
                         required
                         onChange={(e)=>{setFirstname(e.target.value)}}
                       />
@@ -325,21 +348,21 @@ useEffect(() => {
                   </div>
                   <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 formCol">
                     <div className="form-group">
-                      <label for="lastName">Last name</label>
+                      <label htmlFor="lastName">Last name</label>
                       <input
                         id="lastName"
                         className="form-control input-lg formInputs"
                         type="text"
                         name="lastName"
                         placeholder="Type Your Last Name Here..."
-                        autocomplete="off"
+                        autoComplete="off"
                         onChange={(e)=>{setlastname(e.target.value)}}
                       />
                     </div>
                   </div>
                   <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 formCol">
                     <div className="form-group">
-                      <label for="phone">Phone number</label>
+                      <label htmlFor="phone">Phone number</label>
                       <input
                         id="countryCode"
                         className="form-control input-lg center formInputs"
@@ -362,7 +385,7 @@ useEffect(() => {
                   </div>
                   <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 formCol">
                     <div className="form-group">
-                      <label for="speciality">Choose a speciality</label>
+                      <label htmlFor="speciality">Choose a speciality</label>
                       <select
                         className="input-field input-lg formInputs"
                         id="mySelect"
@@ -377,7 +400,7 @@ useEffect(() => {
                   </div>
                   <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 formCol">
                     <div className="form-group">
-                      <label for="city">Choose City</label>
+                      <label htmlFor="city">Choose City</label>
                       <select
                         className="input-field input-lg valid formInputs"
                         id="selectCity"
@@ -411,8 +434,8 @@ useEffect(() => {
                         className="form-control input-lg center formInputs"
                         name="img"
                         placeholder="Enter Image URL"
-                        type={"url"}
-                        onChange={(e)=>{setImg(e.target.value)}}
+                        type="file"
+                        onChange={handleImg}
                       />
                     </div>
                   </div>

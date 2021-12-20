@@ -6,6 +6,13 @@ import firebase from "../../fbconifq/fbAuth";
 import "./req.css";
 
 function Reg(props) {
+  const [users, loading, error] = useAuthState(firebase.auth());
+  
+  useEffect(() => {
+    if (loading) return;
+    if (!users) return history("/");
+  }, [users, loading]);
+
   const history = useNavigate();
   const mailreg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
   const pwreg = /^[0-9]{6,20}$/;

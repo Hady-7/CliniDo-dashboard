@@ -23,7 +23,8 @@ const Navbar = ({ sidebarOpen, openSidebar }) => {
           <Dropdown.Menu>
             <Dropdown.Item href="#/action-1">
               {" "}
-              <i class="fas fa-user"></i> Add Admin
+              <i class="fas fa-user"></i>
+             <Link to="register">   Add Admin </Link>
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

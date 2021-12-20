@@ -84,20 +84,9 @@ const Main = () => {
             </div>
           </div>
 
-          <div className="card">
-            <i
-              className="fa fa-thumbs-up fa-2x text-green fs-4"
-              aria-hidden="true"
-            ></i>
-            <div className="card_inner">
-              <p className="text-primary-p">Number of Reviews</p>
-              <span className="font-bold text-title">645</span>
-            </div>
-          </div>
+        
         </div>
-        {/* <!-- MAIN CARDS ENDS HERE --> */}
-
-        {/* <!-- CHARTS STARTS HERE --> */}
+     
        
       </div>
     </main>

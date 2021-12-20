@@ -76,7 +76,6 @@ const UserList = () => {
             <TableHead>
               <TableRow>
                 <StyledTableCell>Email</StyledTableCell>
-                <StyledTableCell>uuid</StyledTableCell>
                 <StyledTableCell>Edit or Delete</StyledTableCell>
               </TableRow>
             </TableHead>
@@ -86,9 +85,7 @@ const UserList = () => {
                   <StyledTableCell component="th" scope="row">
                     {row.email}
                   </StyledTableCell>
-                  <StyledTableCell>
-                    {row.uid} 
-                  </StyledTableCell>
+                 
                   <StyledTableCell>
                     <i className="fas fa-trash-alt" onClick={() => handlDelete(row.id)}></i>
                   </StyledTableCell>

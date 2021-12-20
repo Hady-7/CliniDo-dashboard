@@ -236,7 +236,8 @@ function EditDoctor() {
   const [drCategory,setSpec] = useState('')
   const [drCity,setCity] = useState('')
   const [drArea,setArea] = useState('')
-  const [image,setImg] = useState('')
+  const [image,setImg] = useState(null)
+  const [url, setUrl] = useState("");
   const [addr,setAddr] = useState('')
   const [fees,setFees] = useState(0)
   const [time,setTime] = useState(0)
@@ -286,15 +287,34 @@ function EditDoctor() {
     "Hematology",
     "Hepatology (Liver Doctor)",
   ];
-
-  const form = (e) => {
-    e.preventDefault();
-    firebase.firestore().collection("Doctor").doc(id).update({firstName,lastName,mobile,drCategory,drCity,drArea,image,addr,fees,time}).then(
-      res => console.log("added succesfully")
-    ).catch(
-      err => console.log(err.code)
-    )
+  const handleImg = (e) => {
+    setImg(e.target.files[0])
+   
   }
+  const form = (e) => {
+    
+    e.preventDefault();
+    if (image.name) {
+      firebase.storage().ref(`images/${image.name}`).put(image).on("state changed", 
+      snapshot => {},
+      error => {
+        console.log(error);
+      },() => {
+      firebase.storage().ref('images').child(image.name).getDownloadURL().then(url => {
+          setUrl(url);
+          console.log("image downloaded");
+          if(url !== ""){
+            firebase.firestore().collection("Doctor").doc(id).update({firstName,lastName,mobile,drCategory,drCity,drArea,url,addr,fees,time}).then(
+              res => {
+                console.log("updated done");
+                history("/doctor-list")
+              }
+            ).catch(
+              err => console.log(err.code)
+            )}
+      })
+    })
+  }}
   return (
     <>
     <div className="container-fluid content">
@@ -410,8 +430,8 @@ function EditDoctor() {
                         className="form-control input-lg center formInputs"
                         name="img"
                         placeholder="Enter Image URL"
-                        type={"url"}
-                        onChange={(e)=>{setImg(e.target.value)}}
+                        type="file"
+                        onChange={handleImg}
                       />
                     </div>
                   </div>
