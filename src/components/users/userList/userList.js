@@ -35,6 +35,7 @@ const UserList = () => {
     []
   );
   console.log(user);
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -76,6 +77,7 @@ const UserList = () => {
             <TableHead>
               <TableRow>
                 <StyledTableCell>Email</StyledTableCell>
+                <StyledTableCell>Bookings</StyledTableCell>
                 <StyledTableCell>Delete</StyledTableCell>
               </TableRow>
             </TableHead>
@@ -84,6 +86,9 @@ const UserList = () => {
                 <StyledTableRow key={row.name}>
                   <StyledTableCell component="th" scope="row">
                     {row.email}
+                  </StyledTableCell>
+                  <StyledTableCell component="th" scope="row">
+                    {/* {row.bookings[row]} */}
                   </StyledTableCell>
 
                   <StyledTableCell>
