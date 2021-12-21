@@ -31,6 +31,7 @@ const UserList = () => {
             return { ...doc.data(), id: doc.id };
           })
         );
+        user.map((row) => console.log(row.bookings?.length));
       }),
     []
   );
@@ -77,7 +78,7 @@ const UserList = () => {
             <TableHead>
               <TableRow>
                 <StyledTableCell>Email</StyledTableCell>
-                <StyledTableCell>Bookings</StyledTableCell>
+                <StyledTableCell>Number of Bookings</StyledTableCell>
                 <StyledTableCell>Delete</StyledTableCell>
               </TableRow>
             </TableHead>
@@ -88,9 +89,8 @@ const UserList = () => {
                     {row.email}
                   </StyledTableCell>
                   <StyledTableCell component="th" scope="row">
-                    {/* {row.bookings[row]} */}
+                    {row.bookings?.length}
                   </StyledTableCell>
-
                   <StyledTableCell>
                     <i
                       className="fas fa-trash-alt"
