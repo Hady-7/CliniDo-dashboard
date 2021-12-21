@@ -28,9 +28,13 @@ const UserList = () => {
       onSnapshot(collection(db, "users"), (snapshot) => {
         setuser(
           snapshot.docs.map((doc) => {
+            
             return { ...doc.data(), id: doc.id };
           })
         );
+        user.map(row =>
+          console.log(row.bookings?.length)
+        )
       }),
     []
   );
@@ -75,7 +79,8 @@ const UserList = () => {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell>Email</StyledTableCell>
+              <StyledTableCell>Email</StyledTableCell>
+              <StyledTableCell>Bookings</StyledTableCell>
                 <StyledTableCell>Delete</StyledTableCell>
               </TableRow>
             </TableHead>
@@ -85,7 +90,9 @@ const UserList = () => {
                   <StyledTableCell component="th" scope="row">
                     {row.email}
                   </StyledTableCell>
-
+                  <StyledTableCell component="th" scope="row">
+                    {row.bookings?.length}
+                  </StyledTableCell>
                   <StyledTableCell>
                     <i
                       className="fas fa-trash-alt"
