@@ -76,7 +76,6 @@ const UserList = () => {
             <TableHead>
               <TableRow>
                 <StyledTableCell>Email</StyledTableCell>
-                <StyledTableCell>Phone</StyledTableCell>
                 <StyledTableCell>Delete</StyledTableCell>
               </TableRow>
             </TableHead>
@@ -85,9 +84,6 @@ const UserList = () => {
                 <StyledTableRow key={row.name}>
                   <StyledTableCell component="th" scope="row">
                     {row.email}
-                  </StyledTableCell>
-                  <StyledTableCell component="th" scope="row">
-                    {row.phone}
                   </StyledTableCell>
 
                   <StyledTableCell>
