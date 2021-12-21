@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 const UserList = () => {
   const [users, loading, error] = useAuthState(firebase.auth());
   const history = useNavigate();
-  
+
   useEffect(() => {
     if (loading) return;
     if (!users) return history("/");
@@ -76,7 +76,8 @@ const UserList = () => {
             <TableHead>
               <TableRow>
                 <StyledTableCell>Email</StyledTableCell>
-                <StyledTableCell>Edit or Delete</StyledTableCell>
+                <StyledTableCell>Phone</StyledTableCell>
+                <StyledTableCell>Delete</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -85,9 +86,15 @@ const UserList = () => {
                   <StyledTableCell component="th" scope="row">
                     {row.email}
                   </StyledTableCell>
-                 
+                  <StyledTableCell component="th" scope="row">
+                    {row.phone}
+                  </StyledTableCell>
+
                   <StyledTableCell>
-                    <i className="fas fa-trash-alt" onClick={() => handlDelete(row.id)}></i>
+                    <i
+                      className="fas fa-trash-alt"
+                      onClick={() => handlDelete(row.id)}
+                    ></i>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
