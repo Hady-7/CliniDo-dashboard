@@ -77,7 +77,8 @@ const UserList = () => {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell>Email</StyledTableCell>
+              <StyledTableCell>Email</StyledTableCell>
+              <StyledTableCell>User name</StyledTableCell>
                 <StyledTableCell>Number of Bookings</StyledTableCell>
                 <StyledTableCell>Delete</StyledTableCell>
               </TableRow>
@@ -87,6 +88,9 @@ const UserList = () => {
                 <StyledTableRow key={row.name}>
                   <StyledTableCell component="th" scope="row">
                     {row.email}
+                  </StyledTableCell>
+                  <StyledTableCell component="th" scope="row">
+                    {row.displayName}
                   </StyledTableCell>
                   <StyledTableCell component="th" scope="row">
                     {row.bookings?.length}

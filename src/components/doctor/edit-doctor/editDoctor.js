@@ -250,14 +250,17 @@ function EditDoctor() {
       .doc(id)
       .get()
       .then((res) => {
-        setFirstname(res.firstName);
-        setlastname(res.lastName);
-        setMobile(res.mobile);
-        setSpec(res.drCategory);
-        setCity(res.drCity);
-        setArea(res.drArea);
-        setAddr(res.addr);
-      })
+        console.log(res.data());
+        setFirstname(res.data().firstName);
+        setlastname(res.data().lastName);
+        setMobile(res.data().mobile);
+        setSpec(res.data().drCategory);
+        setCity(res.data().drCity);
+        setArea(res.data().drArea);
+        setAddr(res.data().addr);
+        setFees(res.data().fees);
+        setTime(res.data().time);
+      }),[]
   );
   const [{ city, area }, setData] = useState({
     city: "Alexandria",
@@ -507,6 +510,8 @@ function EditDoctor() {
                         onChange={(e) => {
                           setFees(e.target.value);
                         }}
+                        value={fees}
+
                       />
                     </div>
                   </div>
@@ -538,6 +543,8 @@ function EditDoctor() {
                         onChange={(e) => {
                           setTime(e.target.value);
                         }}
+                        value={time}
+
                       />
                     </div>
                   </div>
