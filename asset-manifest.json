@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/CliniDo-dashboard/static/css/main.f65b0713.chunk.css",
-    "main.js": "/CliniDo-dashboard/static/js/main.dcb719cd.chunk.js",
-    "main.js.map": "/CliniDo-dashboard/static/js/main.dcb719cd.chunk.js.map",
-    "runtime-main.js": "/CliniDo-dashboard/static/js/runtime-main.ebcdd27d.js",
-    "runtime-main.js.map": "/CliniDo-dashboard/static/js/runtime-main.ebcdd27d.js.map",
-    "static/css/2.7d31e46d.chunk.css": "/CliniDo-dashboard/static/css/2.7d31e46d.chunk.css",
-    "static/js/2.76a9eaa5.chunk.js": "/CliniDo-dashboard/static/js/2.76a9eaa5.chunk.js",
-    "static/js/2.76a9eaa5.chunk.js.map": "/CliniDo-dashboard/static/js/2.76a9eaa5.chunk.js.map",
-    "index.html": "/CliniDo-dashboard/index.html",
-    "static/css/2.7d31e46d.chunk.css.map": "/CliniDo-dashboard/static/css/2.7d31e46d.chunk.css.map",
-    "static/css/main.f65b0713.chunk.css.map": "/CliniDo-dashboard/static/css/main.f65b0713.chunk.css.map",
-    "static/js/2.76a9eaa5.chunk.js.LICENSE.txt": "/CliniDo-dashboard/static/js/2.76a9eaa5.chunk.js.LICENSE.txt",
-    "static/media/avatar-svgrepo-com.d04e51c6.svg": "/CliniDo-dashboard/static/media/avatar-svgrepo-com.d04e51c6.svg"
+    "main.css": "/Clinido_Dashboard/static/css/main.f65b0713.chunk.css",
+    "main.js": "/Clinido_Dashboard/static/js/main.e27e204c.chunk.js",
+    "main.js.map": "/Clinido_Dashboard/static/js/main.e27e204c.chunk.js.map",
+    "runtime-main.js": "/Clinido_Dashboard/static/js/runtime-main.42765e87.js",
+    "runtime-main.js.map": "/Clinido_Dashboard/static/js/runtime-main.42765e87.js.map",
+    "static/css/2.7d31e46d.chunk.css": "/Clinido_Dashboard/static/css/2.7d31e46d.chunk.css",
+    "static/js/2.3e04899e.chunk.js": "/Clinido_Dashboard/static/js/2.3e04899e.chunk.js",
+    "static/js/2.3e04899e.chunk.js.map": "/Clinido_Dashboard/static/js/2.3e04899e.chunk.js.map",
+    "index.html": "/Clinido_Dashboard/index.html",
+    "static/css/2.7d31e46d.chunk.css.map": "/Clinido_Dashboard/static/css/2.7d31e46d.chunk.css.map",
+    "static/css/main.f65b0713.chunk.css.map": "/Clinido_Dashboard/static/css/main.f65b0713.chunk.css.map",
+    "static/js/2.3e04899e.chunk.js.LICENSE.txt": "/Clinido_Dashboard/static/js/2.3e04899e.chunk.js.LICENSE.txt",
+    "static/media/avatar-svgrepo-com.d04e51c6.svg": "/Clinido_Dashboard/static/media/avatar-svgrepo-com.d04e51c6.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.ebcdd27d.js",
+    "static/js/runtime-main.42765e87.js",
     "static/css/2.7d31e46d.chunk.css",
-    "static/js/2.76a9eaa5.chunk.js",
+    "static/js/2.3e04899e.chunk.js",
     "static/css/main.f65b0713.chunk.css",
-    "static/js/main.dcb719cd.chunk.js"
+    "static/js/main.e27e204c.chunk.js"
   ]
 }
